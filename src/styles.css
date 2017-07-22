@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background-color: black;
+    color:white;
+}
+
+hr {
+    display: block;
+      height: 1px;
+      border: 0;
+      border-top: 1px solid #ccc;
+      margin: 1em 0;
+      padding: 0;
+}
+
+.main-container{
+    margin-top: 40px;
+}
+.separado-minimo{
+    margin-top: 10px;
+}
+
+.active{
+    background-color: white;
+    color: black !important;
+}

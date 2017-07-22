@@ -1,0 +1,15 @@
+<div class="container text-center">
+  <div >
+    <h3>Profile</h3>
+    <hr>
+  </div>
+  <div >
+    <img src="{{profile?.picture}}" class="rounded-circle">
+    <div>
+      <label><i class="fa fa-user"></i> Nickname</label>
+      <h3 >{{ profile?.nickname }}</h3>
+      <h3 >{{ profile?.name }}</h3>
+    </div>
+    <pre class="full-profile">{{ profile | json }}</pre>
+  </div>
+</div>
