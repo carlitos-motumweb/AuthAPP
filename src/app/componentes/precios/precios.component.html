@@ -1,3 +1,87 @@
-<p>
-  precios works!
-</p>
+<h4>Formularios <small>Código</small></h4>
+<hr>
+<form [formGroup]="formulario" (ngSubmit)="guardarCambios()">
+  <div formGroupName="nombreCompleto">
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Nombre</label>
+      <div class="col-8">
+        <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre">
+        <div class="alert alert-danger separado-minimo" role="alert" *ngIf="formulario.get('nombreCompleto.nombre').touched && formulario.get('nombreCompleto.nombre').errors?.required">
+          <strong>Error!</strong> Se debe ingresar un nombre
+        </div>
+        <div class="alert alert-danger separado-minimo" role="alert" *ngIf="formulario.get('nombreCompleto.nombre').touched && formulario.get('nombreCompleto.nombre').errors?.minlength">
+          <strong>Error!</strong> Son necesarios al menos {{formulario.controls.nombreCompleto.controls.nombre.errors.minlength.requiredLength}} caracteres
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Apellido</label>
+      <div class="col-8">
+        <input class="form-control" type="text" placeholder="Apellido" formControlName="apellidos">
+        <div class="alert alert-danger separado-minimo" role="alert" *ngIf="formulario.get('nombreCompleto.apellidos').touched && formulario.get('nombreCompleto.apellidos').errors?.required">
+          <strong>Error!</strong> Se debe ingresar un apellido
+        </div>
+        <div class="alert alert-danger separado-minimo" role="alert" *ngIf="formulario.get('nombreCompleto.apellidos').touched && formulario.get('nombreCompleto.apellidos').errors?.apellidosInvalidos">
+          <strong>Error!</strong> Se debe ingresar un apellido valido
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Usuario</label>
+    <div class="col-8">
+        <input class="form-control" type="text" placeholder="usuario" formControlName="usuario">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Password</label>
+    <div class="col-8">
+        <input class="form-control" type="password" placeholder="password" formControlName="password1">
+        <input class="form-control" type="password" placeholder="password" formControlName="password2">
+      <div class="alert alert-danger separado-minimo" role="alert" *ngIf="formulario.get('password1').touched && formulario.get('password2').touched && formulario.get('password1').errors?.required && formulario.get('password2').errors?.required">
+        <strong>Error!</strong> Se deben colocar password
+      </div>
+      <div class="alert alert-danger separado-minimo" role="alert" *ngIf="formulario.get('password2').touched && formulario.get('password2').errors?.compararPassword">
+        <strong>Error!</strong> Passwords diferentes
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Correo</label>
+    <div class="col-md-8">
+      <input class="form-control" type="email" placeholder="Correo electrónico" formControlName="email">
+      <div class="alert alert-danger separado-minimo" role="alert" *ngIf="formulario.get('email').touched && formulario.get('email').errors?.required">
+        <strong>Error!</strong> Se debe ingresar un email
+      </div>
+      <div class="alert alert-danger separado-minimo" role="alert" *ngIf="formulario.get('email').touched && formulario.get('email').errors?.pattern">
+        <strong>Error!</strong> Se debe ingresar un email valido
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-2 col-form-label">
+        Pasatiempos
+    <button (click)="agregarPasatiempo()" type="button" class="btn btn-primary" >+</button>
+    <button (click)="eliminarPasatiempo()" type="button" class="btn btn-primary" >-</button>
+        </label>
+    <div class="col-md-8" formArrayName="pasatiempos">
+      <input *ngFor="let pasatiempo of formulario.controls['pasatiempos'].controls; let i = index" class="form-control" type="text" [formControlName]="i">
+    </div>
+
+  </div>
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button type="submit" class="btn btn-outline-primary"
+
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+
+  {{formulario.valid}}
+  <br>
+  {{formulario.status}}
+</form>
